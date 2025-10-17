@@ -40,41 +40,75 @@ p {
 }
 
 .drop-zone {
-  width: 220px;
-  height: 70px;
+  width: 240px;
+  height: 120px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #90caf9;
-  background: rgba(255,255,255,0.7);
-  border-radius: 16px;
+  border: 3px dashed #3498db;
+  background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.8) 100%);
+  border-radius: 20px;
   margin: 0 16px;
-  min-height: 70px;
-  gap: 12px;
-  box-shadow: 0 2px 8px #b2ebf2;
+  min-height: 120px;
+  gap: 8px;
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.8),
+    inset 0 -2px 4px rgba(0,0,0,0.1),
+    0 4px 15px rgba(52,152,219,0.2);
   position: relative;
   z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.drop-zone:hover {
+  border-color: #2980b9;
+  background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(230,245,255,0.9) 100%);
+  transform: translateY(-2px);
 }
 
 #center-line {
-  width: 8px;
-  height: 70px;
-  background: #1976d2;
+  width: 12px;
+  height: 90px;
+  background: linear-gradient(45deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
   margin: 0 8px;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.1);
+  border: 1px solid #1a252f;
+  position: relative;
+}
+
+/* Add a pivot point at the top of the center line */
+#center-line::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 16px;
+  background: radial-gradient(circle, #34495e 0%, #2c3e50 100%);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  border: 1px solid #1a252f;
 }
 
 .scale {
   width: 500px;
-  height: 32px;
-  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
-  border-radius: 16px;
+  height: 20px;
+  background: linear-gradient(45deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  border-radius: 10px;
   margin: 0 auto;
-  box-shadow: 0 4px 16px #90caf9;
+  box-shadow: 
+    0 6px 20px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.1),
+    inset 0 -2px 4px rgba(0,0,0,0.2);
   transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
   position: relative;
   z-index: 1;
+  border: 2px solid #1a252f;
 }
 
 .balls {
@@ -86,32 +120,46 @@ p {
 
 
 .ball {
-  width: 64px;
-  height: 90px;
-  background: linear-gradient(135deg, #ff8a65 60%, #fff3e0 100%);
-  border-radius: 32px 32px 32px 32px / 32px 32px 48px 48px;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 16px #b2ebf2, 0 0 24px #ff8a65 inset;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 50%, #ffb3b3 100%);
+  border-radius: 50px 50px 50px 50px / 60px 60px 40px 40px;
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 
+    0 8px 25px rgba(0,0,0,0.15),
+    inset -10px -10px 0 rgba(0,0,0,0.1),
+    inset 15px 15px 0 rgba(255,255,255,0.2);
+  cursor: grab;
+  transition: all 0.3s ease;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
   user-select: none;
   position: relative;
-  animation: balloon-bounce 0.8s;
+  transform-style: preserve-3d;
 }
 
-@keyframes balloon-bounce {
-  0% { transform: translateY(0); }
-  20% { transform: translateY(-18px); }
-  40% { transform: translateY(0); }
-  60% { transform: translateY(-8px); }
-  80% { transform: translateY(0); }
-  100% { transform: translateY(0); }
+/* Balloon hover effect */
+.ball:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 12px 30px rgba(0,0,0,0.2),
+    inset -10px -10px 0 rgba(0,0,0,0.1),
+    inset 15px 15px 0 rgba(255,255,255,0.3);
+  cursor: grabbing;
+}
+
+@keyframes balloon-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.ball {
+  animation: balloon-float 3s ease-in-out infinite;
 }
 
 .ball.selected-left {
@@ -134,25 +182,25 @@ p {
   display: block;
   position: absolute;
   left: 50%;
-  top: 90px;
-  width: 2px;
-  height: 18px;
-  background: #bdbdbd;
-  border-radius: 2px;
+  top: 98px;
+  width: 1px;
+  height: 25px;
+  background: linear-gradient(to bottom, #666 0%, #999 100%);
   transform: translateX(-50%);
+  box-shadow: 1px 0 1px rgba(0,0,0,0.2);
 }
 
-/* Balloon highlight */
+/* Balloon highlight - makes it look shiny and 3D */
 .ball::before {
   content: '';
   position: absolute;
-  left: 18px;
-  top: 18px;
-  width: 18px;
-  height: 18px;
-  background: rgba(255,255,255,0.35);
+  left: 20px;
+  top: 15px;
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 70%);
   border-radius: 50%;
-  filter: blur(2px);
+  filter: blur(1px);
 }
 
 .ball.selected-left {
