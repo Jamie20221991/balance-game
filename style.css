@@ -1,0 +1,225 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #e3f2fd 0%, #b2ebf2 100%);
+  color: #222;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 32px;
+  color: #1976d2;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #b2ebf2;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+#scale-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+}
+
+#scale-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  width: 600px;
+  margin-bottom: -20px;
+  position: relative;
+  z-index: 2;
+}
+
+.drop-zone {
+  width: 220px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #90caf9;
+  background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  margin: 0 16px;
+  min-height: 70px;
+  gap: 12px;
+  box-shadow: 0 2px 8px #b2ebf2;
+  position: relative;
+  z-index: 2;
+}
+
+#center-line {
+  width: 8px;
+  height: 70px;
+  background: #1976d2;
+  margin: 0 8px;
+  border-radius: 4px;
+}
+
+.scale {
+  width: 500px;
+  height: 32px;
+  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+  border-radius: 16px;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px #90caf9;
+  transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+  position: relative;
+  z-index: 1;
+}
+
+.balls {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 32px 0;
+}
+
+
+.ball {
+  width: 64px;
+  height: 90px;
+  background: linear-gradient(135deg, #ff8a65 60%, #fff3e0 100%);
+  border-radius: 32px 32px 32px 32px / 32px 32px 48px 48px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 16px #b2ebf2, 0 0 24px #ff8a65 inset;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #fff;
+  user-select: none;
+  position: relative;
+  animation: balloon-bounce 0.8s;
+}
+
+@keyframes balloon-bounce {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-18px); }
+  40% { transform: translateY(0); }
+  60% { transform: translateY(-8px); }
+  80% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.ball.selected-left {
+  border: 4px solid #1976d2;
+  box-shadow: 0 0 24px #1976d2, 0 4px 16px #b2ebf2;
+  transform: scale(1.1);
+  animation: balloon-bounce 0.8s;
+}
+
+.ball.selected-right {
+  border: 4px solid #d32f2f;
+  box-shadow: 0 0 24px #d32f2f, 0 4px 16px #b2ebf2;
+  transform: scale(1.1);
+  animation: balloon-bounce 0.8s;
+}
+
+/* Balloon string */
+.ball::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 90px;
+  width: 2px;
+  height: 18px;
+  background: #bdbdbd;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+/* Balloon highlight */
+.ball::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.ball.selected-left {
+  border: 4px solid #1976d2;
+  box-shadow: 0 0 16px #1976d2;
+  transform: scale(1.1);
+}
+
+.ball.selected-right {
+  border: 4px solid #d32f2f;
+  box-shadow: 0 0 16px #d32f2f;
+  transform: scale(1.1);
+}
+
+.controls button {
+  margin: 16px;
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px #b2ebf2;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.controls button:hover {
+  background: linear-gradient(90deg, #64b5f6 0%, #1976d2 100%);
+  box-shadow: 0 4px 16px #1976d2;
+}
+
+#message {
+  font-weight: bold;
+  margin-top: 32px;
+  font-size: 1.5rem;
+  color: #d32f2f;
+  text-shadow: 0 2px 8px #fff;
+}
+
+#results-log {
+  margin: 32px auto;
+  width: 600px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 16px #b2ebf2;
+}
+
+#results-log h2 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #1976d2;
+}
+
+#log-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#log-list li {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Balance Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 style="font-size:3.2rem; color:#1976d2; letter-spacing:3px; text-shadow:0 4px 16px #90caf9, 0 1px 0 #fff; font-weight:900; margin-top:32px;">🎈 BALANCE GAME 🎈</h1>
+    <p style="font-size:1.5rem; color:#d84315; font-weight:bold; margin-bottom:28px; text-shadow:0 2px 8px #fff, 0 1px 0 #ffccbc; letter-spacing:1px;">Drag the balloons onto the scale and discover the secret heavy one!</p>
+
+    <!-- Scale area with left/right drop zones and center line -->
+    <div id="scale-area">
+        <div id="scale-container">
+            <div id="left-drop" class="drop-zone"></div>
+            <div id="center-line"></div>
+            <div id="right-drop" class="drop-zone"></div>
+        </div>
+        <div id="scale" class="scale"></div>
+    </div>
+
+
+    <!-- Balloons container -->
+    <div id="balls-container" class="balls"></div>
+
+    <div id="results-log">
+        <h2>Weighing History</h2>
+        <ul id="log-list"></ul>
+    </div>
+
+    <!-- Game controls -->
+    <div class="controls">
+        <button id="weighBtn">⚖️ Weigh</button>
+        <button id="guessBtn">🎯 Guess</button>
+        <button id="resetBtn">🔄 Reset</button>
+    </div>
+
+    <!-- Message area -->
+    <div id="message"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
